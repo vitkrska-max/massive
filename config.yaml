@@ -1,0 +1,42 @@
+# =============================================================================
+# config.yaml — Centrální ne-tajná konfigurace.
+# =============================================================================
+#
+# Tento soubor NEOBSAHUJE žádné přístupové klíče/hesla — ty jsou v secrets.yaml.
+# Proto je bezpečné tento soubor verzovat v gitu.
+
+# --- Předplatné ---
+# Jestliže je zaplaceno předplatné, tak pro stahování využít Flat soubory.
+# Jestliže není zaplaceno, tak REST Api mají omezení na 5 dotazů za minutu.
+# To je teoreticky prodleva 12.0s mezi dotazy.
+# Reálně je potřeba dát prodlevu delší (12.5s) aby nedocházelo k chybám
+# 429 Too Many Requests.
+subscription: False
+
+# --- Hloubka historie ---
+# Jestliže je zaplaceno předplatné subscription=True, tak lze ztahovathistorie.
+# Podle daného předplatného nastavte hloubku historie (v měsících) pro stahování dat.
+history_months: 120
+
+# --- Markets ---
+# Seznam trhů, které se mají stahovat.
+markets:
+  - "stocks"
+#  - "crypto"
+#  - "fx"
+
+# --- Adresář lokálního úložiště ---
+# Adresář pro logy[root_folder]/logs
+# FlatFiles: [root_folder]/flat_files/{market}/{timeframe}/{year}/{month}/{date}.csv.gz
+# Parquet[root_folder]/{market}/{timeframe}/{year}/{month}/{date}.parquet
+# Ostatní data: [root_folder]/{market}/reference.db
+root_folder: "/home/vitek/trading_data/massive"
+
+# --- Opakování dotazů v případě chyb ---
+# Kolikrát se má opakovat dotaz v případě chyby.
+# U chyby 429 Too Many Requests je potřeba počkat nějakou dobu.
+retries: 3
+
+# --- SEC kontaktní email (me_ticker_info.py) ---
+# SEC vyžaduje identifikaci při stahování dat (https://www.sec.gov/developer)
+sec_contact_email: "vit.krska@gmail.com"

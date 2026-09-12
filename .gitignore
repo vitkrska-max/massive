@@ -1,0 +1,26 @@
+# Přístupové klíče — NIKDY necommitovat.
+# require_secret() v massive_data.py na tento soubor odkazuje ve své chybě.
+secrets.yaml
+
+# Lokální nastavení Claude Code — obsahuje ANTHROPIC_AUTH_TOKEN v plaintextu.
+# Verzuje se jen settings.json, ne settings.local.json.
+.claude/settings.local.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.log
+
+# Dočasné adresáře testů a smoke-testu.
+# Testy si je samy vytvářejí a uklízejí (_test_flat_root, _test_minute_dir,
+# _test_real_root_m, _smoke_root, …), ale po pádu zůstanou ležet.
+# Vzory s lomítkem na konci proto neseberou samotné testovací skripty _test_*.py.
+_test_*/
+_smoke_*/
+
+# Záloha smazaných legacy souborů me_*.py — lokální síť, ne obsah projektu.
+_legacy_me.zip
+
+# POZOR: 1m_stocks.txt, 1m_crypto.txt a 1m_fx.txt se záměrně NEignorují.
+# Je to vstup, který kód potřebuje (update_minute je čte) a v tomto repozitáři
+# ho není z čeho vygenerovat — bez nich by projekt nešel spustit.
