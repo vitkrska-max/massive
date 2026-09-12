@@ -17,6 +17,7 @@ python _test_daily.py                            # offline, fake massive
 python _test_minute.py                           # offline, fake massive
 python _test_real_client.py                      # offline, PRAVÁ knihovna massive
 python _smoke_real_api.py [both|daily|minute]    # ŽIVĚ — spotřebuje API kvótu
+git push                                         # záloha na GitHub (origin)
 ```
 
 Testy nemají runner ani framework — každý soubor je samostatný skript a „spustit jeden test" znamená spustit ten soubor. Úspěch = výpis `VŠE OK` a exit 0; selhání = `AssertionError`. Testy si samy vytvářejí a uklízejí dočasné adresáře (`_test_*_root*`, `_test_minute_dir`).
@@ -68,4 +69,4 @@ Nesjednocovat bez dotazu — jsou to vědomá rozhodnutí uživatele:
 
 **`update_minute` není v `__main__`** — je pomalá (12,5 s na ticker) a běží se ručně. `_REST_DELAY_SECONDS = 12.5` je napevno v kódu, v `config.yaml` klíč pro prodlevu není.
 
-**Adresář není pod gitem** a není tu `.gitignore`, přestože `secrets.yaml` obsahuje reálný klíč a `config.yaml` i docstringy na `.gitignore` odkazují.
+**Repozitář je pod gitem** (od 2026-09-12), `origin` míří na https://github.com/vitkrska-max/massive, který je **veřejný**. `secrets.yaml` a `.claude/settings.local.json` proto musí zůstat v `.gitignore` — před každým commitem zkontroluj `git status`, že se tam nedostaly. Commit identita je nastavená jen lokálně pro tento repozitář (`vitkrska-max` + GitHub noreply adresa), globální `~/.gitconfig` zůstal nedotčený.
